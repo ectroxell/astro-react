@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-typescript",
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
-  "version": "2.0.0",
-  "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
+  "name": "astro-react",
+  "author": "Emma Troxell <troxellemma@gmail.com>",
+  "version": "1.0.0",
+  "description": "An Electron application including TypeScript, React, Jest and ESLint.",
   "main": "./.webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start",
