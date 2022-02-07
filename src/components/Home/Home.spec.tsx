@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { Greetings } from './Greetings'
+import { Greetings } from './Home'
 
 test('Greetings should renders', () => {
   const { getByText, getByAltText } = render(<Greetings />)
