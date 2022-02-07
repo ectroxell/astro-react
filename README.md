@@ -1,6 +1,6 @@
-## Electron + TypeScript + React
+## astro
 
-Boilerplate for a project using Electron, React and Typescript.
+A learning project using Electron, React and Typescript.
 
 ## Installation
 
