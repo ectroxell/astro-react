@@ -1,11 +1,15 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase, query, ref } from 'firebase/database';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDf6W8tb_c2bixbgC-5vcVsvgkUM3LWMJc",
   authDomain: "astro-react-c12a5.firebaseapp.com",
@@ -18,4 +22,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+// functions
+// const snapshotToArray = (snapshot: any) => Object.entries(snapshot).map(e => Object.assign(e[1], { key: e[0] }));
+
+// export const getUsers = (): User[] => {
+//   const usersRef = ref(db, 'users');
+//   return snapshotToArray(usersRef).map((user: any) => {
+//     return {
+//       id: user.snapshot.key,
+//       email: user.snapshot.val().email
+//     } as User;
+//   });
+// };
+
