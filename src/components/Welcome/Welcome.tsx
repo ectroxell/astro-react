@@ -2,9 +2,10 @@ import { getAuth, signOut } from 'firebase/auth'
 import { FunctionComponent, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
+import { Button } from '../../styles/GlobalStyle'
 import { Login } from '../Login/Login'
 import { SignUp } from '../SignUp/SignUp'
-import { Button, Container, Text } from './Welcome.styles'
+import { ButtonContainer, Container, Text } from './Welcome.styles'
 
 export const Welcome: FunctionComponent = () => {
   const auth = getAuth(app)
@@ -27,6 +28,7 @@ export const Welcome: FunctionComponent = () => {
   return (
     <>
       <Container>
+        <ButtonContainer>
           <Button
             onClick={() => {
               setIsLogin(true)
@@ -43,6 +45,7 @@ export const Welcome: FunctionComponent = () => {
           >
             Sign Up
           </Button>
+        </ButtonContainer>
         {isLogin && <Login />}
         {isSignUp && <SignUp />}
       </Container>
