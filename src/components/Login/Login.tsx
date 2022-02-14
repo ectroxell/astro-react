@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
 import { Container } from './Login.styles'
+import { Button } from '../Button/Button'
 
 export const Login: FunctionComponent = () => {
   const auth = getAuth(app)
@@ -57,7 +58,7 @@ export const Login: FunctionComponent = () => {
               />
             </div>
             <div className='loginButton'>
-              <button>Log In</button>
+              <Button>Log In</Button>
             </div>
           </form>
         </Container>

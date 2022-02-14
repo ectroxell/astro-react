@@ -1,5 +1,4 @@
 import { ReactNode, ButtonHTMLAttributes } from 'react'
-
 import { ButtonContainer } from './Button.styles'
 
 type ButtonProps = {

@@ -2,6 +2,7 @@ import { getAuth, updateProfile } from 'firebase/auth'
 import { useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
+import { Button } from '../Button/Button'
 
 export const SignUp = () => {
   const auth = getAuth(app)
@@ -21,6 +22,7 @@ export const SignUp = () => {
     })
     e.preventDefault()
   }
+  
   return (
     <>
       <form
@@ -53,7 +55,7 @@ export const SignUp = () => {
           />
         </div>
         <div>
-          <button>Create Account</button>
+          <Button>Create Account</Button>
         </div>
       </form>
     </>
