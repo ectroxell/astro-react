@@ -2,7 +2,6 @@ import { getAuth, signOut } from 'firebase/auth'
 import { FunctionComponent, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
-import { Button } from '../Button/Button'
 import { Login } from '../Login/Login'
 import { SignUp } from '../SignUp/SignUp'
 import { Container } from './Welcome.styles'
@@ -21,23 +20,7 @@ export const Welcome: FunctionComponent = () => {
     return (
       <div>
         <p>Welcome, {user!.displayName}!</p>
-        <Button onClick={logout}>Log out</Button>
-      </div>
-    )
-  }
-
-  if (loading) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div>
-        <p>Whoops! There's been an error: {error.message}</p>
+        <button onClick={logout}>Log out</button>
       </div>
     )
   }
@@ -45,22 +28,22 @@ export const Welcome: FunctionComponent = () => {
     <>
       <Container>
         <div className="container">
-          <Button
+          <button
             onClick={() => {
               setIsLogin(true)
               setIsSignUp(false)
             }}
           >
             Login
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={() => {
               setIsSignUp(true)
               setIsLogin(false)
             }}
           >
             Sign Up
-          </Button>
+          </button>
         </div>
         {isLogin && <Login />}
         {isSignUp && <SignUp />}
