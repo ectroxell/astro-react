@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   padding: 25px;
@@ -6,8 +6,12 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
 
-  button {
-    margin: 12px;
-  }
+export const Button = styled.button`
+  margin: 12px;
+`
+
+export const Text = styled.p`
+  margin: 12px;
 `
