@@ -1,7 +1,7 @@
 import { getAuth, signOut } from 'firebase/auth'
-import { FunctionComponent, useState, useEffect } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { fetchMoonData } from '../../domain/api/moon-phase'
+import { fetchMoonData } from '../../domain/data/moon-phase'
 import { app } from '../../firebase/firebase'
 import { Button } from '../../styles/GlobalStyle'
 import { Login } from '../Login/Login'
@@ -21,7 +21,6 @@ export const Welcome: FunctionComponent = () => {
 
   const moonData = fetchMoonData();
 
-  console.log({moonData})
   if (user) {
     return (
       <Container>
