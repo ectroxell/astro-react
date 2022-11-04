@@ -1,13 +1,12 @@
-import { GlobalStyle } from './styles/GlobalStyle'
+
 import { Home } from './components/Home/Home'
-import { Welcome } from './components/Welcome/Welcome'
+// import { NavigationBar } from './components/Navigation/Navigation'
 
 export function App() {
   return (
     <>
-      <GlobalStyle />
+      {/* <NavigationBar /> */}
       <Home />
-      <Welcome />
     </>
   )
 }

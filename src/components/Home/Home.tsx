@@ -1,13 +1,16 @@
 import { FunctionComponent } from 'react';
 import MoonIcon from '../icons/Moon';
-import { Container, Text } from './Home.styles'
+import { Welcome } from '../Welcome/Welcome';
+import './home.scss';
+import '../../index.scss'
 
 export const Home: FunctionComponent = () => {
   return (
-    <Container>
-      <MoonIcon />
-      <Text>Welcome to Moonology</Text>
-    </Container>
+    <div className='container'>
+      <MoonIcon width={'180pt'} height={'180pt'}/>
+      <p className='titleText'>Welcome to Moonology</p>
+      <Welcome />
+    </div>
   )
 }
  

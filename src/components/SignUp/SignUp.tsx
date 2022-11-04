@@ -2,6 +2,7 @@ import { getAuth, updateProfile } from 'firebase/auth'
 import { useState } from 'react'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
+import './signup.scss';
 
 export const SignUp = () => {
   const auth = getAuth(app)
@@ -23,12 +24,13 @@ export const SignUp = () => {
   }
   return (
     <>
+    <div className='signUpContainer'>
       <form
         onSubmit={e => {
           handleSubmit(e)
         }}
       >
-        <div className="email">
+        <div className="email text">
           <label>Email: </label>
           <input
             onChange={e => setEmail(e.target.value)}
@@ -36,7 +38,7 @@ export const SignUp = () => {
             type="email"
           />
         </div>
-        <div className="password">
+        <div className="password text">
           <label>Password: </label>
           <input
             onChange={e => setPassword(e.target.value)}
@@ -44,7 +46,7 @@ export const SignUp = () => {
             type="password"
           />
         </div>
-        <div className="displayName">
+        <div className="displayName text">
           <label>Name: </label>
           <input
             onChange={e => setDisplayName(e.target.value)}
@@ -52,10 +54,11 @@ export const SignUp = () => {
             type="text"
           />
         </div>
-        <div>
+        <div className='createAccountButton'>
           <button>Create Account</button>
         </div>
       </form>
+      </div>
     </>
   )
 }

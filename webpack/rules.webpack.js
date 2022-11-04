@@ -4,6 +4,10 @@ module.exports = [
     use: 'node-loader',
   },
   {
+    test: /\.scss$/,
+    use: ['style-loader', 'css-loader', 'sass-loader']
+  },
+  {
     test: /\.(m?js|node)$/,
     parser: { amd: false },
     use: {

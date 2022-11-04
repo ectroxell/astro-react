@@ -3,10 +3,10 @@ import { FunctionComponent, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { fetchMoonData } from '../../domain/data/moon-phase'
 import { app } from '../../firebase/firebase'
-import { Button } from '../../styles/GlobalStyle'
 import { Login } from '../Login/Login'
 import { SignUp } from '../SignUp/SignUp'
-import { ButtonContainer, Container, Text } from './Welcome.styles'
+import './welcome.scss'
+import '../../index.scss'
 
 
 export const Welcome: FunctionComponent = () => {
@@ -22,40 +22,42 @@ export const Welcome: FunctionComponent = () => {
   const moonData = fetchMoonData();
 
   if (user) {
-    return (
-      <Container>
-        <Text>Welcome, {user!.displayName}!</Text>
+    return ( 
+    <>
+      <div className='welcomeContainer text'>
+        <p>Hello, {user!.displayName}!</p>
         {moonData ?
-          <Text>The moon is {moonData.illuminated}% illuminated and in the {moonData.phase} phase</Text> : null
+          <p>The moon is {moonData.illuminated}% illuminated and in the {moonData.phase} phase</p> : null
         }
-        <Button onClick={logout}>Log out</Button>
-      </Container>
+        <button onClick={logout}>Log out</button>
+      </div>
+    </>
     )
   }
   return (
     <>
-      <Container>
-        <ButtonContainer>
-          <Button
+       <div className='container text'>
+        <div className='buttonContainer'>
+          <button
             onClick={() => {
               setIsLogin(true)
               setIsSignUp(false)
             }}
           >
             Login
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={() => {
               setIsSignUp(true)
               setIsLogin(false)
             }}
           >
             Sign Up
-          </Button>
-        </ButtonContainer>
+          </button>
+        </div>
         {isLogin && <Login />}
         {isSignUp && <SignUp />}
-      </Container>
+        </div>
     </>
   )
 }

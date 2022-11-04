@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { app } from '../../firebase/firebase'
-import { Container } from './Login.styles'
+import './login.scss';
 
 export const Login: FunctionComponent = () => {
   const auth = getAuth(app)
@@ -23,25 +23,25 @@ export const Login: FunctionComponent = () => {
   if (error) {
     return (
       <div>
-        <p>Error: {error.message}</p>
+        <p className='text'>Error: {error.message}</p>
       </div>
     )
   }
   if (loading) {
-    return <p>Loading...</p>
+    return <p className='text'>Loading...</p>
   }
 
   return (
     <>
       {user === null ? (
-        <Container>
+        <div className='loginContainer'>
           <form
             onSubmit={e => {
               handleSubmit(e)
             }}
           >
             <div className="email">
-              <label>Email: </label>
+              <label className='text'>Email: </label>
               <input
                 onChange={e => setEmail(e.target.value)}
                 name="email"
@@ -49,7 +49,7 @@ export const Login: FunctionComponent = () => {
               />
             </div>
             <div className="password">
-              <label>Password: </label>
+              <label className='text'>Password: </label>
               <input
                 onChange={e => setPassword(e.target.value)}
                 name="password"
@@ -60,7 +60,7 @@ export const Login: FunctionComponent = () => {
               <button>Log In</button>
             </div>
           </form>
-        </Container>
+        </div>
       ) : (
         <></>
       )}
