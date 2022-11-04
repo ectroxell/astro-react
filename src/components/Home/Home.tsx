@@ -14,7 +14,7 @@ export const Home: FunctionComponent = () => {
   const auth = getAuth(app)
   const [isLogin, setIsLogin] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
-  const [user, loading, error] = useAuthState(auth)
+  const [user] = useAuthState(auth)
 
   const logout = () => {
     signOut(auth)
