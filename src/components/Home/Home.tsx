@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import MoonIcon from '../icons/Moon';
+import MoonIcon from '../assets/icons/Moon';
 import { Welcome } from '../Welcome/Welcome';
 import './home.scss';
 import '../../index.scss'

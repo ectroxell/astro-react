@@ -7,3 +7,14 @@
 .text {
   font-family: 'Inconsolata', monospace;
 }
+
+
+html, body, #root {
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+    
+              

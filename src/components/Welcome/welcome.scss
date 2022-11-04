@@ -13,14 +13,16 @@
   align-items: center;
   justify-content: center;
 }
+
 button {
   margin: 12px;
   padding: 6px;
   background-color: #7364c4;
-  font-size: 14px;
-  border-radius: 15%;
+  font-size: 16px;
+  border-radius: 5%;
   border: none;
   color: #E1E1E6;
+  font-family: inherit;
 }
 
 p {

@@ -25,9 +25,9 @@ export const Welcome: FunctionComponent = () => {
     return ( 
     <>
       <div className='welcomeContainer text'>
-        <p>Hello, {user!.displayName}!</p>
+        <p>Hello {user!.displayName}! ✨</p>
         {moonData ?
-          <p>The moon is {moonData.illuminated}% illuminated and in the {moonData.phase} phase</p> : null
+          <p>The moon is {moonData.illuminated}% illuminated and in the {moonData.phase} phase.</p> : null
         }
         <button onClick={logout}>Log out</button>
       </div>
@@ -43,6 +43,7 @@ export const Welcome: FunctionComponent = () => {
               setIsLogin(true)
               setIsSignUp(false)
             }}
+            hidden={isLogin}
           >
             Login
           </button>
@@ -51,6 +52,7 @@ export const Welcome: FunctionComponent = () => {
               setIsSignUp(true)
               setIsLogin(false)
             }}
+            hidden={isSignUp}
           >
             Sign Up
           </button>
