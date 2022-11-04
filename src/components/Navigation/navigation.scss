@@ -1,8 +1,32 @@
+nav {
+  width: 100%;
+  margin-bottom: 55px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
-  width: 320px;
+  width: 288px;
+}
+
+.navLinksContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+  margin: 8px;
+  padding: 12px;
+  li a {
+    color: #E1E1E6;
+    font-size: 24px;
+    &:hover {
+      color: #7364c4;
+    }
+  } 
 }

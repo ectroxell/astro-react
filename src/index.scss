@@ -2,6 +2,7 @@
 
 .titleText {
   font-family: 'Shrikhand', cursive;
+  font-size: 24px;
 }
 
 .text {
@@ -13,8 +14,8 @@ html, body, #root {
   height: 100%;
   display: flex;
   flex: 1;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   input {
     font-family: inherit;
   }

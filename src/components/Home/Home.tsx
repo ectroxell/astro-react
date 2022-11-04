@@ -37,7 +37,6 @@ export const Home: FunctionComponent = () => {
     </>
     )
   }
-  
   return (
     <>
     <div className='container'>
