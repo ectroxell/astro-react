@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
+  Navigate
 } from "react-router-dom";
 import './navigation.scss';
 import { JournalPage } from '../Journal/Journal';
@@ -16,7 +17,7 @@ export const NavigationBar: FunctionComponent = () => {
         <nav>
           <ul className='navLinksContainer titleText'>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/home">Home</Link>
             </li>
             <li>
               <Link to="/journal">Journal</Link>
@@ -31,7 +32,7 @@ export const NavigationBar: FunctionComponent = () => {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/home" element={<Home/>} />
           <Route path="/journal" element={<JournalPage />} />
           {/* <Route path="/rituals">
             <Rituals />
@@ -39,7 +40,7 @@ export const NavigationBar: FunctionComponent = () => {
           <Route path="/learn">
             <Learn />
           </Route> */}
-          {/* <Redirect to='/' /> */}
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </div>
     </Router>
