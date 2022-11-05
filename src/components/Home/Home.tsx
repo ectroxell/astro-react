@@ -39,35 +39,37 @@ export const Home: FunctionComponent = () => {
   }
   return (
     <>
-    <div className='container'>
-    <MoonIcon width={'180pt'} height={'180pt'}/>
-      <p className='titleText'>Welcome to Moonology</p>
+    <div className='homeWrapper'>
+      <div className='homeContainer'>
+      <MoonIcon width={'180pt'} height={'180pt'}/>
+        <p className='titleText'>Welcome to Moonology</p>
 
-    </div>
-       <div className='container text'>
-        <div className='buttonContainer'>
-          <button
-            onClick={() => {
-              setIsLogin(true)
-              setIsSignUp(false)
-            }}
-            hidden={isLogin}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => {
-              setIsSignUp(true)
-              setIsLogin(false)
-            }}
-            hidden={isSignUp}
-          >
-            Sign Up
-          </button>
-        </div>
-        {isLogin && <Login />}
-        {isSignUp && <SignUp />}
-        </div>
+      </div>
+        <div className='homeContainer text'>
+          <div className='buttonContainer'>
+            <button
+              onClick={() => {
+                setIsLogin(true)
+                setIsSignUp(false)
+              }}
+              hidden={isLogin}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => {
+                setIsSignUp(true)
+                setIsLogin(false)
+              }}
+              hidden={isSignUp}
+            >
+              Sign Up
+            </button>
+          </div>
+          {isLogin && <Login />}
+          {isSignUp && <SignUp />}
+          </div>
+          </div>
     </>
   )
 }

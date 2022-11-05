@@ -2,32 +2,43 @@ import { getAuth } from "firebase/auth";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getJournalsByUserId } from "../../domain/data/journals";
+import { Journal } from "../../domain/types/Journal";
 import { app } from "../../firebase/firebase";
 
 
-export const Journal: FunctionComponent = () => {
-  const auth = getAuth(app)
-  const [user] = useAuthState(auth)
-  const [journals, setJournals] = useState([]);
-  // const journals = user ? await getJournalsByUserId(user.uid) : [];
-  // useEffect(async (user) => {
-  //   if (user) {
-  //     setJournals(await getJournalsByUserId(user.uid));
-  //   }
-  //   return null
-  // })
+export const JournalPage: FunctionComponent = () => {
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+  const [journals, setJournals] = useState<Journal[]>([]);
   
+  const getJournals = async (userId: string) => {
+    const journalList: Journal[] = await getJournalsByUserId(userId);
+    console.log({journalList})
+    setJournals(journalList);
+  }
+  
+  useEffect(() => {
+    console.log({user})
+    if (user) {
+      getJournals(user.uid);
+    };
+  }, [user]);
+
   // if no user is signed in, it should show "must sign in to use journal" message
   if (!user) {
     return (
-      <p className="text">Sign in to create a journal entry.</p>
-    )
-  }
+      <>
+        <p className="text">Sign in to create a journal entry.</p>
+      </>
+    );
+  };
 
   // if signed in but no journal entries, show 'no journal entries' message
   if (journals.length === 0) {
     return (
-      <p className="text">You do not have any journal entries. Create your first journal entry here!</p>
+      <>
+        <p className="text">You do not have any journal entries. Create your first journal entry here!</p>
+      </>
     )
   }
 
@@ -43,5 +54,7 @@ export const Journal: FunctionComponent = () => {
       </div>
       </>
     )
-  })
+  });
+
+  return <>hello</>
 }

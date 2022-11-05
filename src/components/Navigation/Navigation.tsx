@@ -7,6 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import './navigation.scss';
+import { JournalPage } from '../Journal/Journal';
 
 export const NavigationBar: FunctionComponent = () => {
   return (
@@ -30,15 +31,15 @@ export const NavigationBar: FunctionComponent = () => {
         </nav>
 
         <Routes>
-          <Route path="/home" element={<Home/>} />
-          <Route path="/journal" />
-            {/* <Journal /> */}
+          <Route path="/" element={<Home/>} />
+          <Route path="/journal" element={<JournalPage />} />
           {/* <Route path="/rituals">
             <Rituals />
           </Route>
           <Route path="/learn">
             <Learn />
           </Route> */}
+          {/* <Redirect to='/' /> */}
         </Routes>
       </div>
     </Router>
