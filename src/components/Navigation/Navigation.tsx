@@ -16,16 +16,13 @@ import { Journal } from '../../domain/types/Journal';
 import { getJournalsByUserId } from '../../domain/data/journals';
 
 export const NavigationBar: FunctionComponent = () => {
-  console.log('navigation rendered')
   const auth = getAuth(app);
   const [user] = useAuthState(auth);
   const [journals, setJournals] = useState<Journal[]>([]);
   
   useEffect(() => {
-    console.log('in use effect')
     const getJournals = async (userId: string) => {
       const journalList: Journal[] = await getJournalsByUserId(userId);
-      console.log({journalList})
       setJournals(journalList);
     };
 

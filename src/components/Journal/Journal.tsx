@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Journal } from '../../domain/types/Journal'
+import './journal.scss'
 
 type JournalProps = {
   journals: Journal[]
@@ -10,14 +11,14 @@ type JournalEntryProps = {
   moonPhase: string
   date: string
   text: string
-  key: string;
+  key: string
 }
 
 const JournalEntry: FunctionComponent<JournalEntryProps> = (
   props: JournalEntryProps
 ) => {
   return (
-    <div key={props.key}>
+    <div key={props.key} className="journalEntry">
       <p className="titleText">
         {props.date}: {props.moonPhase}
       </p>
@@ -53,20 +54,18 @@ export const JournalPage: FunctionComponent<JournalProps> = (
   // if the user has any journal entries, they should be displayed
   if (props.journals.length) {
     return (
-      <>
+      <div className="journalsContainer">
         {props.journals.map(journal => {
           return (
-            <div>
-              <JournalEntry
-                date={journal.date.toLocaleString()}
-                text={journal.text}
-                moonPhase={journal.moonPhase}
-                key={journal.id}
-              />
-            </div>
+            <JournalEntry
+              date={journal.date.toLocaleString()}
+              text={journal.text}
+              moonPhase={journal.moonPhase}
+              key={journal.id}
+            />
           )
         })}
-      </>
+      </div>
     )
   }
 
