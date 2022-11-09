@@ -3,4 +3,5 @@ export type Journal = {
   moonPhase: string;
   text: string;
   userId: string;
+  id: string;
 }
