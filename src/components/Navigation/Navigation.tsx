@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { Home } from '../Home/Home';
 import {
   BrowserRouter as Router,
@@ -9,8 +9,31 @@ import {
 } from "react-router-dom";
 import './navigation.scss';
 import { JournalPage } from '../Journal/Journal';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { app } from '../../firebase/firebase';
+import { Journal } from '../../domain/types/Journal';
+import { getJournalsByUserId } from '../../domain/data/journals';
 
 export const NavigationBar: FunctionComponent = () => {
+  console.log('navigation rendered')
+  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
+  const [journals, setJournals] = useState<Journal[]>([]);
+  
+  useEffect(() => {
+    console.log('in use effect')
+    const getJournals = async (userId: string) => {
+      const journalList: Journal[] = await getJournalsByUserId(userId);
+      console.log({journalList})
+      setJournals(journalList);
+    };
+
+    if (user) {
+      getJournals(user.uid);
+    };
+  }, [user]);
+
   return (
     <Router>
       <div className='container'>
@@ -32,8 +55,8 @@ export const NavigationBar: FunctionComponent = () => {
         </nav>
 
         <Routes>
-          <Route path="/home" element={<Home/>} />
-          <Route path="/journal" element={<JournalPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/journal" element={<JournalPage user={user} journals={journals} />} />
           {/* <Route path="/rituals">
             <Rituals />
           </Route>
