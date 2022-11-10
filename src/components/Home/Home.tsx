@@ -9,7 +9,6 @@ import './home.scss'
 import '../../index.scss'
 import MoonIcon from '../assets/icons/Moon'
 
-
 export const Home: FunctionComponent = () => {
   const auth = getAuth(app)
   const [isLogin, setIsLogin] = useState(false)
@@ -18,35 +17,37 @@ export const Home: FunctionComponent = () => {
 
   const logout = () => {
     signOut(auth)
-  };
+  }
 
-  const moonData = fetchMoonData();
+  const moonData = fetchMoonData()
 
   if (user) {
-    return ( 
-    <>
-      <div className='welcomeContainer text'>
-      <MoonIcon width={'180pt'} height={'180pt'}/>
-      <p className='titleText'>Welcome to Moonology</p>
-        <p>Hello {user!.displayName}! ✨</p>
-        {moonData ?
-          <p>The moon is {moonData.illuminated}% illuminated and in the {moonData.phase} phase.</p> : null
-        }
-        <button onClick={logout}>Log out</button>
-      </div>
-    </>
+    return (
+      <>
+        <div className="welcomeContainer text">
+          <MoonIcon width={'180pt'} height={'180pt'} />
+          <p className="titleText">Welcome to Moonology</p>
+          <p>Hello {user!.displayName}! ✨</p>
+          {moonData ? (
+            <p>
+              The moon is {moonData.illuminated}% illuminated and in the
+              {moonData.phase} phase.
+            </p>
+          ) : null}
+          <button onClick={logout}>Log out</button>
+        </div>
+      </>
     )
   }
   return (
     <>
-    <div className='homeWrapper'>
-      <div className='homeContainer'>
-      <MoonIcon width={'180pt'} height={'180pt'}/>
-        <p className='titleText'>Welcome to Moonology</p>
-
-      </div>
-        <div className='homeContainer text'>
-          <div className='buttonContainer'>
+      <div className="homeWrapper">
+        <div className="homeContainer">
+          <MoonIcon width={'180pt'} height={'180pt'} />
+          <p className="titleText">Welcome to Moonology</p>
+        </div>
+        <div className="homeContainer text">
+          <div className="buttonContainer">
             <button
               onClick={() => {
                 setIsLogin(true)
@@ -68,9 +69,8 @@ export const Home: FunctionComponent = () => {
           </div>
           {isLogin && <Login />}
           {isSignUp && <SignUp />}
-          </div>
-          </div>
+        </div>
+      </div>
     </>
   )
 }
-
