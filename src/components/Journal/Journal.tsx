@@ -11,14 +11,13 @@ type JournalEntryProps = {
   moonPhase: string
   date: string
   text: string
-  key: string
 }
 
 const JournalEntry: FunctionComponent<JournalEntryProps> = (
   props: JournalEntryProps
 ) => {
   return (
-    <div key={props.key} className="journalEntry">
+    <div className="journalEntry">
       <p className="titleText">
         {props.date}: {props.moonPhase}
       </p>
@@ -58,10 +57,10 @@ export const JournalPage: FunctionComponent<JournalProps> = (
         {props.journals.map(journal => {
           return (
             <JournalEntry
+              key={journal.id}
               date={journal.date.toLocaleString()}
               text={journal.text}
               moonPhase={journal.moonPhase}
-              key={journal.id}
             />
           )
         })}

@@ -14,6 +14,7 @@ export const getJournalsByUserId = async (userId: string) => {
       moonPhase: journalDoc.moonPhase,
       text: journalDoc.text,
       userId: journalDoc.userId,
+      id: journalDoc.id
     }
     journals.push(journal)
   });
