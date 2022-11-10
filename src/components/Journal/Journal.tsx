@@ -18,7 +18,7 @@ const JournalEntry: FunctionComponent<JournalEntryProps> = (
 ) => {
   return (
     <div className="journalEntry">
-      <p className="titleText">
+      <p className="titleText journalTitle">
         {props.date}: {props.moonPhase}
       </p>
       <p className="text">{props.text}</p>
