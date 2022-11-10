@@ -4,7 +4,7 @@ import './journal.scss'
 
 type JournalProps = {
   journals: Journal[]
-  user: Object | null | undefined
+  userName: string | null
 }
 
 type JournalEntryProps = {
@@ -30,40 +30,45 @@ export const JournalPage: FunctionComponent<JournalProps> = (
   props: JournalProps
 ) => {
   // if no user is signed in, it should show "must sign in to use journal" message
-  if (!props.user) {
+  if (!props.userName) {
     return (
-      <>
-        <p className="text">Sign in to create a journal entry.</p>
-      </>
+      <div className="textContainer">
+        <p className="text">Login to create a journal entry.</p>
+      </div>
     )
   }
 
   // if signed in but no journal entries, show 'no journal entries' message
   if (!props.journals.length) {
     return (
-      <>
+      <div className="journalsContainer">
         <p className="text">
           You do not have any journal entries. Create your first journal entry
           here!
         </p>
-      </>
+      </div>
     )
   }
 
   // if the user has any journal entries, they should be displayed
   if (props.journals.length) {
     return (
-      <div className="journalsContainer">
-        {props.journals.map(journal => {
-          return (
-            <JournalEntry
-              key={journal.id}
-              date={journal.date.toLocaleString()}
-              text={journal.text}
-              moonPhase={journal.moonPhase}
-            />
-          )
-        })}
+      <div className="journalPageContainer">
+        <div className="titleText journalHeader">
+          {props.userName}'s Moon Journal 🌙
+        </div>
+        <div className="journalsContainer">
+          {props.journals.map(journal => {
+            return (
+              <JournalEntry
+                key={journal.id}
+                date={journal.date.toLocaleString()}
+                text={journal.text}
+                moonPhase={journal.moonPhase}
+              />
+            )
+          })}
+        </div>
       </div>
     )
   }

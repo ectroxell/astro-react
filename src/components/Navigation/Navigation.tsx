@@ -53,7 +53,7 @@ export const NavigationBar: FunctionComponent = () => {
 
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/journal" element={<JournalPage user={user} journals={journals} />} />
+          <Route path="/journal" element={<JournalPage journals={journals} userName={user ? user.displayName : null} />} />
           {/* <Route path="/rituals">
             <Rituals />
           </Route>

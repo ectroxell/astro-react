@@ -1,11 +1,27 @@
 .journalsContainer {
   display: flex;
   flex-direction: column;
-  margin-left: 13%;
 }
 
 .journalEntry {
   margin-bottom: 42px;
   padding: 12px;
-  border: aliceblue solid 1px;
+  border: #E1E1E6 solid 1px;
+}
+
+.textContainer {
+  margin-left: 25%;
+}
+
+.journalHeader {
+  color: #E1E1E6;
+  font-size: 32px;
+  margin-bottom: 42px;
+  position: absolute;
+  top: 86px;
+  margin-left: 40px;
+}
+
+.journalPageContainer {
+  margin-left: 13%;
 }
