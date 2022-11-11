@@ -20,6 +20,8 @@
   position: absolute;
   top: 86px;
   margin-left: 66px;
+  display: flex;
+  flex-direction: column;
 }
 
 .journalPageContainer {
@@ -28,4 +30,13 @@
 
 .journalTitle {
   font-size: 20px;
+}
+
+.journalButton {
+  width: 50%;
+  margin-left: 80px;
+  &:hover {
+    background-color: darkslateblue;
+    cursor: pointer;
+  }
 }

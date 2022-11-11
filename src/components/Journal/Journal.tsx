@@ -39,26 +39,16 @@ export const JournalPage: FunctionComponent<JournalProps> = (
   }
 
   // if signed in but no journal entries, show 'no journal entries' message
-  if (!props.journals.length) {
-    return (
-      <div className="journalsContainer">
-        <p className="text">
-          You do not have any journal entries. Create your first journal entry
-          here!
-        </p>
-      </div>
-    )
-  }
-
   // if the user has any journal entries, they should be displayed
-  if (props.journals.length) {
-    return (
-      <div className="journalPageContainer">
-        <div className="titleText journalHeader">
-          {props.userName}'s Moon Journal 🌙
-        </div>
-        <div className="journalsContainer">
-          {props.journals.map(journal => {
+  return (
+    <div className="journalPageContainer">
+      <div className="titleText journalHeader">
+        <span>{props.userName}'s Moon Journal 🌙</span>
+        <button className="text journalButton">New Entry</button>
+      </div>
+      <div className="journalsContainer">
+        {props.journals.length ? (
+          props.journals.map(journal => {
             return (
               <JournalEntry
                 key={journal.id}
@@ -67,15 +57,14 @@ export const JournalPage: FunctionComponent<JournalProps> = (
                 moonPhase={journal.moonPhase}
               />
             )
-          })}
-        </div>
+          })
+        ) : (
+          <p className="text">
+            You do not have any journal entries. Create your first journal entry
+            here!
+          </p>
+        )}
       </div>
-    )
-  }
-
-  return (
-    <>
-      <p className="text">hello</p>
-    </>
+    </div>
   )
 }
