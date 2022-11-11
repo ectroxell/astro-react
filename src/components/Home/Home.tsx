@@ -30,7 +30,7 @@ export const Home: FunctionComponent = () => {
           <p>Hello {user!.displayName}! ✨</p>
           {moonData ? (
             <p>
-              The moon is {moonData.illuminated}% illuminated and in the
+              The moon is {moonData.illuminated}% illuminated and in the{' '}
               {moonData.phase} phase.
             </p>
           ) : null}

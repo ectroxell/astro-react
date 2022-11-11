@@ -14,6 +14,7 @@ describe('JournalPage', () => {
     },
   ]
   const emptyJournal: Journal[] = []
+  
   it('should render header journals for signed in user with journal entries', () => {
     const { getByText } = render(
       <JournalPage userName={name} journals={journals} />
