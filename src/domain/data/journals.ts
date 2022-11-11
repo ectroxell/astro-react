@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
 import { Journal } from '../types/Journal'
 
@@ -19,4 +19,8 @@ export const getJournalsByUserId = async (userId: string) => {
   })
 
   return journals
+}
+
+export const createNewJournal = async (journal: Journal) => {
+  await addDoc(collection(db, "journals"), journal);
 }

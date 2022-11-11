@@ -1,10 +1,13 @@
 import { FunctionComponent, useState } from 'react'
 import { Journal } from '../../domain/types/Journal'
+import { createNewJournal } from '../../domain/data/journals'
+import { v4 as uuidv4 } from 'uuid'
 import './journal.scss'
 
 type JournalProps = {
   journals: Journal[]
-  userName: string | null
+  user: any | null
+  currentMoonPhase: string
 }
 
 type JournalEntryProps = {
@@ -16,6 +19,8 @@ type JournalEntryProps = {
 type NewJournalModalProps = {
   isModalOpen: boolean
   closeModal: () => void
+  handleSubmit: (e: any) => void
+  onChange: (e: any) => void
 }
 
 const JournalEntry: FunctionComponent<JournalEntryProps> = (
@@ -40,16 +45,24 @@ const NewJournalModal: FunctionComponent<NewJournalModalProps> = (
       style={{ visibility: props.isModalOpen ? 'visible' : 'hidden' }}
     >
       <div className="modalContent">
-        <div className="close" onClick={props.closeModal}>+</div>
+        <div className="close" onClick={props.closeModal}>
+          +
+        </div>
         <div className="titleText">New Journal Entry</div>
-        <form>
+        <div>
           <textarea
             name="journalText"
             autoFocus
             placeholder="What's on your mind..."
+            onChange={e => props.onChange(e.target.value)}
           />
-          <button className="text createJournalButton">Submit</button>
-        </form>
+          <button
+            className="text createJournalButton"
+            onClick={props.handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -59,9 +72,26 @@ export const JournalPage: FunctionComponent<JournalProps> = (
   props: JournalProps
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [newJournalText, setNewJournalText] = useState('')
+
+  const handleSubmit = async () => {
+    // create journal object
+    const newJournal: Journal = {
+      date: new Date(),
+      moonPhase: props.currentMoonPhase,
+      text: newJournalText,
+      userId: props.user.uid,
+      id: uuidv4(),
+    }
+    // add to firestore
+    await createNewJournal(newJournal)
+
+    // close modal
+    setIsModalOpen(false)
+  }
 
   // if no user is signed in, it should show "must sign in to use journal" message
-  if (!props.userName) {
+  if (!props.user) {
     return (
       <div className="textContainer">
         <p className="text">Login to create a journal entry.</p>
@@ -74,8 +104,11 @@ export const JournalPage: FunctionComponent<JournalProps> = (
   return (
     <div className="journalPageContainer">
       <div className="titleText journalHeader">
-        <span>{props.userName}'s Moon Journal 🌙</span>
-        <button className="text newJournalButton" onClick={() => setIsModalOpen(true)}>
+        <span>{props.user.displayName}'s Moon Journal 🌙</span>
+        <button
+          className="text newJournalButton"
+          onClick={() => setIsModalOpen(true)}
+        >
           New Entry
         </button>
       </div>
@@ -101,6 +134,8 @@ export const JournalPage: FunctionComponent<JournalProps> = (
       <NewJournalModal
         isModalOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
+        handleSubmit={handleSubmit}
+        onChange={setNewJournalText}
       />
     </div>
   )

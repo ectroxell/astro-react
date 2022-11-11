@@ -14,11 +14,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { app } from '../../firebase/firebase';
 import { Journal } from '../../domain/types/Journal';
 import { getJournalsByUserId } from '../../domain/data/journals';
+import { MoonData } from '../../domain/types/MoonData';
+import { fetchMoonData } from '../../domain/data/moon-phase';
 
 export const NavigationBar: FunctionComponent = () => {
   const auth = getAuth(app);
   const [user] = useAuthState(auth);
   const [journals, setJournals] = useState<Journal[]>([]);
+
+  const moonData: MoonData = fetchMoonData()
   
   useEffect(() => {
     const getJournals = async (userId: string) => {
@@ -52,8 +56,8 @@ export const NavigationBar: FunctionComponent = () => {
         </nav>
 
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/journal" element={<JournalPage journals={journals} userName={user ? user.displayName : null} />} />
+          <Route path="/home" element={<Home moonData={moonData} user={user} />} />
+          <Route path="/journal" element={<JournalPage journals={journals} user={user} currentMoonPhase={moonData.phase} />} />
           {/* <Route path="/rituals">
             <Rituals />
           </Route>
