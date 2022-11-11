@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { Journal } from '../../domain/types/Journal'
 import { JournalPage } from './Journal'
 
@@ -44,13 +44,21 @@ describe('JournalPage', () => {
     expect(getByText('Login to create a journal entry.')).toBeInTheDocument()
   })
 
-  // describe('NewJournalModal', () => {
-  //   it('should render', () => {
-  //     const { getByRole } = render(
-  //       <JournalPage userName={name} journals={journals} />
-  //     )
+  it('should open modal when create new entry button is clicked and close when X button is clicked', () => {
+    const { getByText, getByRole } = render(
+      <JournalPage userName={name} journals={journals} />
+    )
 
-  //     expect(getByRole('button')).toBeInTheDocument()
-  //   })
-  // })
+    expect(getByText('New Journal Entry')).not.toBeVisible()
+    
+    const newEntryButton = getByRole('button', {name: 'New Entry'})
+    fireEvent.click(newEntryButton)
+
+    expect(getByText('New Journal Entry')).toBeVisible()
+
+    const closeButton = getByText('+')
+    fireEvent.click(closeButton)
+
+    expect(getByText('New Journal Entry')).not.toBeVisible()
+  })
 })
