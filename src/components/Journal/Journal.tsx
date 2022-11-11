@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { Journal } from '../../domain/types/Journal'
 import './journal.scss'
 
@@ -11,6 +11,11 @@ type JournalEntryProps = {
   moonPhase: string
   date: string
   text: string
+}
+
+type NewJournalModalProps = {
+  isModalOpen: boolean
+  closeModal: () => void
 }
 
 const JournalEntry: FunctionComponent<JournalEntryProps> = (
@@ -26,9 +31,35 @@ const JournalEntry: FunctionComponent<JournalEntryProps> = (
   )
 }
 
+const NewJournalModal: FunctionComponent<NewJournalModalProps> = (
+  props: NewJournalModalProps
+) => {
+  return (
+    <div
+      className="bgModal"
+      style={{ visibility: props.isModalOpen ? 'visible' : 'hidden' }}
+    >
+      <div className="modalContent">
+        <div className="close" onClick={props.closeModal}>+</div>
+        <div className="titleText">New Journal Entry</div>
+        <form>
+          <textarea
+            name="journalText"
+            autoFocus
+            placeholder="What's on your mind..."
+          />
+          <button className="text createJournalButton">Submit</button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
 export const JournalPage: FunctionComponent<JournalProps> = (
   props: JournalProps
 ) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   // if no user is signed in, it should show "must sign in to use journal" message
   if (!props.userName) {
     return (
@@ -44,7 +75,9 @@ export const JournalPage: FunctionComponent<JournalProps> = (
     <div className="journalPageContainer">
       <div className="titleText journalHeader">
         <span>{props.userName}'s Moon Journal 🌙</span>
-        <button className="text journalButton">New Entry</button>
+        <button className="text newJournalButton" onClick={() => setIsModalOpen(true)}>
+          New Entry
+        </button>
       </div>
       <div className="journalsContainer">
         {props.journals.length ? (
@@ -65,6 +98,10 @@ export const JournalPage: FunctionComponent<JournalProps> = (
           </p>
         )}
       </div>
+      <NewJournalModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }

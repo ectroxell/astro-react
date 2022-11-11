@@ -44,13 +44,13 @@ describe('JournalPage', () => {
     expect(getByText('Login to create a journal entry.')).toBeInTheDocument()
   })
 
-  describe('createNewJournal', () => {
-    it('should render create new journal button', () => {
-      const { getByRole } = render(
-        <JournalPage userName={name} journals={journals} />
-      )
+  // describe('NewJournalModal', () => {
+  //   it('should render', () => {
+  //     const { getByRole } = render(
+  //       <JournalPage userName={name} journals={journals} />
+  //     )
 
-      expect(getByRole('button')).toBeInTheDocument()
-    })
-  })
+  //     expect(getByRole('button')).toBeInTheDocument()
+  //   })
+  // })
 })
