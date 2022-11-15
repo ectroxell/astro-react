@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
 import { Journal } from '../types/Journal'
 

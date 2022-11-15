@@ -14,19 +14,20 @@ describe('JournalPage', () => {
     },
   ]
   const emptyJournal: Journal[] = []
+  const mockUpdateJournals = jest.fn()
 
   it('should render header journals for signed in user with journal entries', () => {
     const { getByText } = render(
-      <JournalPage user={user} journals={journals} currentMoonPhase={'full moon'} />
+      <JournalPage user={user} journals={journals} currentMoonPhase={'full moon'} updateJournals={mockUpdateJournals} />
     )
 
-    expect(getByText(`${name}'s Moon Journal 🌙`)).toBeInTheDocument()
+    expect(getByText(`${user.displayName}'s Moon Journal 🌙`)).toBeInTheDocument()
     expect(getByText(journals[0].text)).toBeInTheDocument()
   })
 
   it('should render no journals message for signed in users with zerio journal entries', () => {
     const { getByText } = render(
-      <JournalPage user={user} journals={emptyJournal} currentMoonPhase={'full moon'} />
+      <JournalPage user={user} journals={emptyJournal} currentMoonPhase={'full moon'} updateJournals={mockUpdateJournals} />
     )
 
     expect(
@@ -38,7 +39,7 @@ describe('JournalPage', () => {
 
   it('should render correct message for logged out user', () => {
     const { getByText } = render(
-      <JournalPage user={null} journals={emptyJournal} currentMoonPhase={'full moon'} />
+      <JournalPage user={null} journals={emptyJournal} currentMoonPhase={'full moon'} updateJournals={mockUpdateJournals} />
     )
 
     expect(getByText('Login to create a journal entry.')).toBeInTheDocument()
@@ -46,7 +47,7 @@ describe('JournalPage', () => {
 
   it('should open modal when create new entry button is clicked and close when X button is clicked', () => {
     const { getByText, getByRole } = render(
-      <JournalPage user={user} journals={journals} currentMoonPhase={'full moon'} />
+      <JournalPage user={user} journals={journals} currentMoonPhase={'full moon'} updateJournals={mockUpdateJournals} />
     )
 
     expect(getByText('New Journal Entry')).not.toBeVisible()

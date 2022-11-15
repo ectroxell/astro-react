@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
 import { Journal } from '../../domain/types/Journal'
 import { createNewJournal } from '../../domain/data/journals'
 import { v4 as uuidv4 } from 'uuid'
@@ -8,6 +8,7 @@ type JournalProps = {
   journals: Journal[]
   user: any | null
   currentMoonPhase: string
+  updateJournals: Dispatch<SetStateAction<Journal[]>>
 }
 
 type JournalEntryProps = {
@@ -85,7 +86,8 @@ export const JournalPage: FunctionComponent<JournalProps> = (
     }
     // add to firestore
     await createNewJournal(newJournal)
-
+    // update journals
+    props.updateJournals([...props.journals, newJournal])
     // close modal
     setIsModalOpen(false)
   }
