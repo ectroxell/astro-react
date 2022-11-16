@@ -1,9 +1,9 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { Journal } from '../../domain/types/Journal'
 import { JournalPage } from './Journal'
 
 describe('JournalPage', () => {
-  const user = {displayName: 'Albert'}
+  const user = {displayName: 'Albert', uid: '123'}
   const journals: Journal[] = [
     {
       text: 'this is my journal',
@@ -62,4 +62,28 @@ describe('JournalPage', () => {
 
     expect(getByText('New Journal Entry')).not.toBeVisible()
   })
+
+  // it('should add new journal and close modal when submit button is pressed', async () => {
+  //   const { getByText, getByRole, findByText } = render(
+  //     <JournalPage user={user} journals={journals} currentMoonPhase={'full moon'} updateJournals={mockUpdateJournals} />
+  //   )
+  //   const journalText = 'this is my newest journal entry'
+  //   expect(getByText('New Journal Entry')).not.toBeVisible()
+    
+  //   const newEntryButton = getByRole('button', {name: 'New Entry'})
+  //   fireEvent.click(newEntryButton)
+
+  //   expect(getByText('New Journal Entry')).toBeVisible()
+
+  //   const inputBox = getByRole('textbox')
+  //   const submitButton = getByRole('button', {name: 'Submit'})
+
+  //   fireEvent.click(inputBox)
+  //   fireEvent.change(inputBox, {target: {value: journalText}})
+  //   fireEvent.click(submitButton)
+  //   await waitFor(async () => {
+  //     expect(await findByText('New Journal Entry')).not.toBeVisible()
+  //   })
+  //   expect(await findByText(journalText)).toBeInTheDocument()
+  // })
 })
