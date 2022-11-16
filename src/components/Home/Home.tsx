@@ -1,37 +1,37 @@
 import { getAuth, signOut } from 'firebase/auth'
 import { FunctionComponent, useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { fetchMoonData } from '../../domain/data/moon-phase'
 import { app } from '../../firebase/firebase'
 import { Login } from '../Login/Login'
 import { SignUp } from '../SignUp/SignUp'
 import './home.scss'
 import '../../index.scss'
 import MoonIcon from '../assets/icons/Moon'
+import { MoonData } from '../../domain/types/MoonData'
 
-export const Home: FunctionComponent = () => {
+type HomeProps = {
+  moonData: MoonData
+  user: any | null
+}
+export const Home: FunctionComponent<HomeProps> = (props: HomeProps) => {
   const auth = getAuth(app)
   const [isLogin, setIsLogin] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
-  const [user] = useAuthState(auth)
 
   const logout = () => {
     signOut(auth)
   }
 
-  const moonData = fetchMoonData()
-
-  if (user) {
+  if (props.user) {
     return (
       <>
         <div className="welcomeContainer text">
           <MoonIcon width={'180pt'} height={'180pt'} />
           <p className="titleText">Welcome to Moonology</p>
-          <p>Hello {user!.displayName}! ✨</p>
-          {moonData ? (
+          <p>Hello {props.user!.displayName}! ✨</p>
+          {props.moonData ? (
             <p>
-              The moon is {moonData.illuminated}% illuminated and in the{' '}
-              {moonData.phase} phase.
+              The moon is {props.moonData.illuminated}% illuminated and in the{' '}
+              {props.moonData.phase} phase.
             </p>
           ) : null}
           <button onClick={logout}>Log out</button>
